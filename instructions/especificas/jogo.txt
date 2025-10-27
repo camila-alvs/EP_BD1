@@ -1,0 +1,8 @@
+id_categoria
+nome
+idade_minima
+tempo_medio
+min_jogadores
+max_jogadores
+quantidade_em_estoque
+imagem
