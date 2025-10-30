@@ -13,6 +13,8 @@ enum Tables {
   Funcionario,
   Categoria,
   Pessoa,
+  Partida,
+  Reserva_jogo
 }
 
 const DIVIDER =
