@@ -42,20 +42,20 @@ if (SHOULD_SQL_CONNECT) {
     let isUsingTable = true;
 
     while (isUsingTable) {
-      core.displayInstruction("instrucoesIniciais");
+      core.displayInstruction("instrucoesDeTabela");
 
       const acao =
-        (await core.getAnswer("Digite o número da ação desejada", 1, true)) - 1;
+        (await core.getAnswer("Digite o número da ação desejada", 5, true)) - 1;
 
       const instrucoesEspecificas =
-        "instrucoes/especificas/" + tableName + ".txt";
+        "instructions/especificas/" + tableName + ".txt";
       const linhasEspecificas = core
         .getFileContents(instrucoesEspecificas)
         .split("\n")
         .map((l) => l.trim())
         .filter(Boolean);
 
-      const specsFile = "instrucoes/specs/" + tableName + ".txt";
+      const specsFile = "instructions/specs/" + tableName + ".txt";
       const specs = core
         .getFileContents(specsFile)
         .split("\n")
