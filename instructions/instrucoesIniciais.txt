@@ -1,4 +1,12 @@
 -------------------------------------------------------------------------------
 Escolha qual informação você deseja acessar.
-1. Acessar nosso Catálogo de jogos (implementado)
+1. Acessar nosso Catálogo de jogos
+2. Acessar nossas reservas
+3. Acessar nossa lista de clientes
+4. Acessar as mesas
+5. Acessar nossos funcionarios
+6. Acessar as categorias de jogos
+7. Acessar pessoas em geral
+8. Acessar as partidas de jogos
+9. Acessar reservas de jogo
 -------------------------------------------------------------------------------
