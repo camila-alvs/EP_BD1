@@ -1,0 +1,5 @@
+id_reserva
+id_cliente
+id_funcionario
+data_reserva
+status

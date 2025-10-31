@@ -1,0 +1,5 @@
+id_partida
+id_mesa
+id_reserva
+horario_inicio
+horario_fim

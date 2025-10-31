@@ -1,0 +1,3 @@
+id_partida
+id_jogo
+quantidade
