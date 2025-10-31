@@ -247,7 +247,7 @@ if (SHOULD_SQL_CONNECT) {
     } else {
       console.log(DIVIDER);
       // exemplo sql = SELECT * FROM ${tableName}
-      const sql = CODIGO SQL AQUI ENTRE ASPAS
+      const sql = "SELECT c.* FROM partida pa JOIN reserva r ON pa.id_reserva = r.id_reserva JOIN cliente c ON r.id_cliente = c.id_cliente;"
 
       const linhas: any[] = await core.queryAsync(sql);
       linhas.forEach((linha) => console.log(linha));

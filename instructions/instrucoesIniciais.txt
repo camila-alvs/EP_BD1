@@ -9,4 +9,5 @@ Escolha qual informação você deseja acessar.
 7. Acessar pessoas em geral
 8. Acessar as partidas de jogos
 9. Acessar reservas de jogo
+10. Acessar as partidas de que um cliente participou (através das reservas)
 -------------------------------------------------------------------------------
