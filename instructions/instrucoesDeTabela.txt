@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Escolha o que você deseja fazer.
+1. Voltar para o menu anterior
+2. Consultar Tabela
+3. Inserir dado
+4. Excluir dado
+5. Alterar dado
+-------------------------------------------------------------------------------
