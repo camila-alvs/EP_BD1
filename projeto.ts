@@ -245,7 +245,16 @@ if (SHOULD_SQL_CONNECT) {
         }
       }
     } else {
-      // Implementar query de 3 tabelas ao mesmo tempo
+      console.log(DIVIDER);
+      // exemplo sql = SELECT * FROM ${tableName}
+      const sql = CODIGO SQL AQUI ENTRE ASPAS
+
+      const linhas: any[] = await core.queryAsync(sql);
+      linhas.forEach((linha) => console.log(linha));
+      console.log(DIVIDER);
+      await core.questionAsync(
+        `Aperte enter para sair do modo de visualização de tabela. `
+      );
     }
   }
 })();
