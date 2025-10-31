@@ -14,7 +14,7 @@ enum Tables {
   Categoria,
   Pessoa,
   Partida,
-  Reserva_jogo
+  Reserva_jogo,
 }
 
 const DIVIDER =
@@ -28,12 +28,12 @@ function formatDateForSQL(dateString: string): string {
   if (!dateRegex.test(dateString)) {
     throw new Error("Formato de data inválido. Use YYYY-MM-DD");
   }
-  
+
   const date = new Date(dateString);
   if (isNaN(date.getTime())) {
     throw new Error("Data inválida");
   }
-  
+
   return dateString;
 }
 
@@ -56,13 +56,14 @@ if (SHOULD_SQL_CONNECT) {
     );
 
     let isUsingTable = true;
-    if(informacao < 8){
+    if (informacao < 8) {
       while (isUsingTable) {
         core.displayInstruction("instrucoesDeTabela");
-  
+
         const acao =
-          (await core.getAnswer("Digite o número da ação desejada", 5, true)) - 1;
-  
+          (await core.getAnswer("Digite o número da ação desejada", 5, true)) -
+          1;
+
         const instrucoesEspecificas =
           "instructions/especificas/" + tableName + ".txt";
         const linhasEspecificas = core
@@ -70,14 +71,14 @@ if (SHOULD_SQL_CONNECT) {
           .split("\n")
           .map((l) => l.trim())
           .filter(Boolean);
-  
+
         const specsFile = "instructions/specs/" + tableName + ".txt";
         const specs = core
           .getFileContents(specsFile)
           .split("\n")
           .map((l) => l.trim())
           .filter(Boolean);
-  
+
         if (acao == 0) {
           isUsingTable = false;
         } else if (acao == 1) {
@@ -106,17 +107,19 @@ if (SHOULD_SQL_CONNECT) {
               try {
                 return formatDateForSQL(r);
               } catch (error: any) {
-                throw new Error(`Erro no campo ${linhasEspecificas[i]}: ${error.message}`);
+                throw new Error(
+                  `Erro no campo ${linhasEspecificas[i]}: ${error.message}`
+                );
               }
             }
             return r;
           });
-  
+
           const placeholders = linhasEspecificas.map(() => "?").join(", ");
           const sql = `INSERT INTO ${tableName} (${linhasEspecificas.join(
             ", "
           )}) VALUES (${placeholders})`;
-  
+
           try {
             const results: any = await core.queryAsync(sql, insercao);
             console.log("ID de inserção:", results.insertId);
@@ -148,18 +151,21 @@ if (SHOULD_SQL_CONNECT) {
           } else {
             throw new Error("Atributo fora da range especifícada");
           }
-  
+
           console.log(DIVIDER);
-  
+
           const valorAtributo = await core.questionAsync(
             `Digite o valor de ${atributo}: `
           );
-          const remocao = spec == "number" ? Number(valorAtributo) : 
-                         spec == "date" ? valorAtributo :
-                         valorAtributo;
-  
+          const remocao =
+            spec == "number"
+              ? Number(valorAtributo)
+              : spec == "date"
+              ? valorAtributo
+              : valorAtributo;
+
           const sql = `DELETE FROM ${tableName} WHERE ${atributo} = ?`;
-  
+
           try {
             const results: any = await core.queryAsync(sql, [remocao]);
             if (results.affectedRows > 0) {
@@ -180,43 +186,46 @@ if (SHOULD_SQL_CONNECT) {
             "Qual é o id_" + tableName + " do elemento que você deseja editar?"
           );
           console.log(DIVIDER);
-  
+
           const idElemento = Number(
             await core.questionAsync(`Digite o valor de id_${tableName}: `)
           );
-  
+
           console.log(DIVIDER);
-  
+
           linhasEspecificas.forEach((linha, index) => {
             console.log(index + 1 + ". " + linha);
           });
-  
+
           const atributoId = Number(
             (await core.getAnswer(
               `Digite número do atributo que você deseja editar: `,
               linhasEspecificas.length
             )) - 1
           );
-  
+
           let atributo = "";
           let spec = "number";
           atributo = linhasEspecificas[atributoId]!;
           spec = specs[atributoId]!;
-  
+
           console.log(DIVIDER);
-  
+
           let valorNovo: any = await core.questionAsync(
             `Digite novo valor de ${atributo}: `
           );
-  
-          valorNovo = spec == "number" ? Number(valorNovo) : 
-                     spec == "date" ? valorNovo :
-                     valorNovo;
-  
+
+          valorNovo =
+            spec == "number"
+              ? Number(valorNovo)
+              : spec == "date"
+              ? valorNovo
+              : valorNovo;
+
           const sql = `UPDATE ${tableName} SET ${atributo} = ? WHERE id_${tableName} = ?`;
-  
+
           const args = [valorNovo, idElemento];
-  
+
           try {
             const results: any = await core.queryAsync(sql, args);
             if (results.affectedRows > 0) {
@@ -235,8 +244,7 @@ if (SHOULD_SQL_CONNECT) {
           throw new Error("Ação fora da lista de valores possíveis.");
         }
       }
-    }
-    else{
+    } else {
       // Implementar query de 3 tabelas ao mesmo tempo
     }
   }
