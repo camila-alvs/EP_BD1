@@ -56,7 +56,7 @@ if (SHOULD_SQL_CONNECT) {
     );
 
     let isUsingTable = true;
-    if (informacao < 8) {
+    if (informacao < 9) {
       while (isUsingTable) {
         core.displayInstruction("instrucoesDeTabela");
 
