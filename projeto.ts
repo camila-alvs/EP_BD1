@@ -244,10 +244,24 @@ if (SHOULD_SQL_CONNECT) {
           throw new Error("Ação fora da lista de valores possíveis.");
         }
       }
+    } else if (informacao == 9) {
+      console.log(DIVIDER);
+      const sql = "SELECT c.* FROM partida pa JOIN reserva r ON pa.id_reserva = r.id_reserva JOIN cliente c ON r.id_cliente = c.id_cliente;";
+
+      const linhas: any[] = await core.queryAsync(sql);
+      linhas.forEach((linha) => console.log(linha));
+      console.log(DIVIDER);
+      await core.questionAsync(
+        `Aperte enter para sair do modo de visualização de tabela. `
+      );
     } else if (informacao == 10) {
       console.log(DIVIDER);
-      const sql =
-        "SELECT c.* FROM partida pa JOIN reserva r ON pa.id_reserva = r.id_reserva JOIN cliente c ON r.id_cliente = c.id_cliente;";
+
+      const nome = await core.questionAsync(
+        `Digite o nome do cliente que você deseja procurar: `
+      );
+
+      const sql = `SELECT * FROM RESERVA WHERE id_cliente = ( SELECT id_cliente FROM CLIENTE c JOIN PESSOA p ON c.id_pessoa = p.id_pessoa WHERE p.nome = "${nome}");`;
 
       const linhas: any[] = await core.queryAsync(sql);
       linhas.forEach((linha) => console.log(linha));
@@ -259,10 +273,10 @@ if (SHOULD_SQL_CONNECT) {
       console.log(DIVIDER);
 
       const nome = await core.questionAsync(
-        `Digite o nome do cliente que você deseja procurar: `
+        `Digite o nome da categoria que você deseja procurar: `
       );
 
-      const sql = `SELECT * FROM RESERVA WHERE id_cliente = ( SELECT id_cliente FROM CLIENTE c JOIN PESSOA p ON c.id_pessoa = p.id_pessoa WHERE p.nome = ${nome});`;
+      const sql = `SELECT * FROM JOGO WHERE id_categoria = ( SELECT id_categoria FROM CATEGORIA WHERE nome = "${nome}");`;
 
       const linhas: any[] = await core.queryAsync(sql);
       linhas.forEach((linha) => console.log(linha));
@@ -273,11 +287,7 @@ if (SHOULD_SQL_CONNECT) {
     } else if (informacao == 12) {
       console.log(DIVIDER);
 
-      const nome = await core.questionAsync(
-        `Digite o nome da categoria que você deseja procurar: `
-      );
-
-      const sql = `SELECT * FROM JOGO WHERE id_categoria = ( SELECT id_categoria FROM CATEGORIA WHERE nome = ${nome});`;
+      const sql = `SELECT r.id_cliente, COUNT(*) AS total_reservas FROM RESERVA r GROUP BY r.id_cliente;`;
 
       const linhas: any[] = await core.queryAsync(sql);
       linhas.forEach((linha) => console.log(linha));
@@ -288,7 +298,7 @@ if (SHOULD_SQL_CONNECT) {
     } else if (informacao == 13) {
       console.log(DIVIDER);
 
-      const sql = `SELECT r.id_cliente, COUNT(*) AS total_reservas FROM RESERVA r GROUP BY r.id_cliente;`;
+      const sql = `SELECT id_reserva, SUM(quantidade) AS total_jogos FROM RESERVA_JOGO GROUP BY id_reserva;`;
 
       const linhas: any[] = await core.queryAsync(sql);
       linhas.forEach((linha) => console.log(linha));
@@ -299,17 +309,6 @@ if (SHOULD_SQL_CONNECT) {
     } else if (informacao == 14) {
       console.log(DIVIDER);
 
-      const sql = `SELECT id_reserva, SUM(quantidade) AS total_jogos FROM RESERVA_JOGO GROUP BY id_reserva;`;
-
-      const linhas: any[] = await core.queryAsync(sql);
-      linhas.forEach((linha) => console.log(linha));
-      console.log(DIVIDER);
-      await core.questionAsync(
-        `Aperte enter para sair do modo de visualização de tabela. `
-      );
-    } else if (informacao == 15) {
-      console.log(DIVIDER);
-
       const sql = `SELECT nome FROM PESSOA WHERE id_pessoa IN (SELECT id_pessoa FROM CLIENTE) UNION SELECT nome FROM PESSOA WHERE id_pessoa IN (SELECT id_pessoa FROM FUNCIONARIO);`;
 
       const linhas: any[] = await core.queryAsync(sql);
@@ -318,7 +317,7 @@ if (SHOULD_SQL_CONNECT) {
       await core.questionAsync(
         `Aperte enter para sair do modo de visualização de tabela. `
       );
-    } else if (informacao == 16) {
+    } else if (informacao == 15) {
       console.log(DIVIDER);
 
       const sql = `SELECT p.nome FROM PESSOA p JOIN CLIENTE c ON p.id_pessoa = c.id_pessoa JOIN FUNCIONARIO f ON p.id_pessoa = f.id_pessoa;`;
