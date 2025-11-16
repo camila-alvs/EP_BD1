@@ -45,7 +45,7 @@ if (SHOULD_SQL_CONNECT) {
   while (isConnected) {
     core.displayInstruction("instrucoesIniciais");
     const informacao =
-      (await core.getAnswer("Digite o número da informação desejada", 10)) - 1;
+      (await core.getAnswer("Digite o número da informação desejada", 16)) - 1;
 
     const tableName = Tables[informacao]
       ? Tables[informacao].toString().toLowerCase()
