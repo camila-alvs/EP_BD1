@@ -9,18 +9,14 @@ Escolha qual informação você deseja acessar.
 7. Acessar pessoas em geral
 8. Acessar as partidas de jogos
 9. Acessar reservas de jogo
-
 ---------------------------------- AVANÇADO -----------------------------------
 10. Acessar as partidas de que um cliente participou (através das reservas)
 11. Acessar reservas de um cliente pelo nome
 12. Acessar jogos de uma categoria pelo nome
-
 ---------------------------------- METRICAS -----------------------------------
 13. Consultar a quantidade de reservas por cliente
 14. Consultar a quantidade de jogos reservados por reserva
-
 ------------------------------ DADOS ADICIONAIS -------------------------------
 15. Acessar todas as pessoas (Clientes OU funcionarios)
 16. Acessar todas as pessoas que são Clientes E funcionarios
-
 -------------------------------------------------------------------------------
