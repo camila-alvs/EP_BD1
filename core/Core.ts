@@ -66,21 +66,28 @@ export class Core {
     return informacao;
   }
 
-  public checkConnection(): Boolean {
-    return this.pool.getConnection((err: any, connection: any) => {
+  public checkConnection(): boolean {
+    // Esse valor será atualizado dentro do callback
+    let connected = true;
+
+    this.pool.getConnection((err: any, connection: any) => {
       if (err) {
         console.error(chalk.red("Erro de conexão:"), err);
-        return false;
+        connected = false;
+        return;
       }
+
       console.log(
         chalk.green(
           "Conexão bem sucedida!\n\n" +
             chalk.yellow("Bem vinde ao portal Playeasy!")
         )
       );
+
       connection.release();
-      return true;
     });
+
+    return connected;
   }
 
   public displayInstruction(
