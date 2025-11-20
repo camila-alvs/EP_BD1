@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import chalk from "chalk";
 
 const readline = require("readline");
 const mysql = require("mysql");
@@ -72,17 +71,15 @@ export class Core {
 
     this.pool.getConnection((err: any, connection: any) => {
       if (err) {
-        console.error(chalk.red("Erro de conexão:"), err);
+        console.error("Erro de conexão:", err);
         connected = false;
         return;
       }
 
       console.log(
-        chalk.green(
           "Conexão bem sucedida!\n\n" +
-            chalk.yellow("Bem vinde ao portal Playeasy!")
+            "Bem vinde ao portal Playeasy!"
         )
-      );
 
       connection.release();
     });
@@ -92,13 +89,12 @@ export class Core {
 
   public displayInstruction(
     instruction: string,
-    color = chalk.reset,
     enumerate = false
   ) {
     const instructionFile = "instructions/" + instruction + ".txt";
     const instructionLines = this.getFileContents(instructionFile).split("\n");
     instructionLines.forEach((line, index) => {
-      console.log(enumerate == true ? index + 1 + " " : "" + color(line));
+      console.log(enumerate == true ? index + 1 + " " : "" + line);
     });
   }
 }

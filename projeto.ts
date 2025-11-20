@@ -1,5 +1,3 @@
-import chalk from "chalk";
-
 import { Core } from "./core/Core";
 
 const SHOULD_SQL_CONNECT = false;
@@ -52,7 +50,7 @@ if (SHOULD_SQL_CONNECT) {
       : "";
 
     console.log(
-      DIVIDER + chalk.green("Acessando " + Tables[informacao] + "s...")
+      DIVIDER + "Acessando " + Tables[informacao] + "s..."
     );
 
     let isUsingTable = true;
